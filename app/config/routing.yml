@@ -1,3 +1,11 @@
+tipddy_security:
+    resource: "@TipddySecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tipddy_backend:
+    resource: "@TipddyBackendBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tipddy_survey:
     resource: "@TipddySurveyBundle/Resources/config/routing.yml"
     prefix:   /

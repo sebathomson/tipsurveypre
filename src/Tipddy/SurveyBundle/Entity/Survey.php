@@ -3,6 +3,7 @@
 namespace Tipddy\SurveyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Survey
@@ -24,6 +25,7 @@ class Survey
        /**
         * @ORM\Column(name="title", type="string", length=255, nullable=false)
         *
+        * @Assert\NotBlank()
         */
        protected $title;
 	
@@ -31,6 +33,7 @@ class Survey
        /**
         * @ORM\Column(name="description", type="text")
         *
+        * @Assert\NotBlank()
         */
       protected $description;
 
