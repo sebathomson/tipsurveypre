@@ -1,3 +1,10 @@
-tipddy_security_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: TipddySecurityBundle:Default:index }
+login:
+    pattern: /
+    defaults: { _controller: "TipddySecurityBundle:Default:login"}
+
+login_check:
+    pattern: /login_check
+
+
+login_logout:
+    pattern: /logout
