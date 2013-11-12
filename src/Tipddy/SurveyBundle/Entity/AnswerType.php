@@ -27,7 +27,12 @@ class AnswerType
      *
      */
     private $etiqueta;    
-
+     
+     
+   public function __toString()
+   {
+	   return $this->getEtiqueta();
+   }
 
 
 

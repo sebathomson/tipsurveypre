@@ -81,11 +81,18 @@ class Question
       
       
       /**
-       * @ORM\OneToMany(targetEntity="Answer", mappedBy="question", cascade={"all"})
+       * @ORM\OneToMany(targetEntity="Answer", mappedBy="question", cascade={"all"}, orphanRemoval=true)
        *
        */
        protected $answers;
-
+       
+       
+       public function __toString()
+       {
+	       return $this->getQuestion();
+       }
+       
+       
 
     /**
      * Constructor
@@ -275,6 +282,9 @@ class Question
     public function addAnswer(\Tipddy\SurveyBundle\Entity\Answer $answers)
     {
         $this->answers[] = $answers;
+        
+        //para relacionar con el elemento que creo
+        $answers->setQuestion($this);
     
         return $this;
     }
