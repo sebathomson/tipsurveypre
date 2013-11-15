@@ -5,6 +5,8 @@ namespace Tipddy\SurveyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Tipddy\BackendBundle\Util\Util;
+
 /**
  * Survey
  *
@@ -36,6 +38,12 @@ class Survey
         * @Assert\NotBlank()
         */
       protected $description;
+      
+      
+      /**
+       * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+       */
+      protected $slug;
 
 
       /**
@@ -65,6 +73,8 @@ class Survey
     public function setTitle($title)
     {
         $this->title = $title;
+        
+        $this->slug = Util::getSlug($title);
     
         return $this;
     }
@@ -140,5 +150,28 @@ class Survey
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Survey
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

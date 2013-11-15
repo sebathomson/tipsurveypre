@@ -27,4 +27,4 @@ survey_update:
 survey_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "TipddySurveyBundle:Survey:delete" }
-    requirements: { _method: post|delete }
+  

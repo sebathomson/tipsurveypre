@@ -15,10 +15,18 @@ security:
     access_control:
          - { path: ^/survey, roles: [ROLE_TIPDDY]}
     providers:
-         default_provider:
+         chain_provider:
+             chain:
+                 providers: [in_memory, user_db]
+    
+         in_memory:
              memory:
                  users:
                      - { name: ryan, password: ryanpass, roles: 'ROLE_USER'}
                      - { name: admin, password: kitten, roles: 'ROLE_TIPDDY'}
+         user_db:
+             entity: { class: Tipddy\SecurityBundle\Entity\User, property: email }
+                     
     encoders:
+         Tipddy\SecurityBundle\Entity\User: { algorithm: sha512, iterations: 10}
          Symfony\Component\Security\Core\User\User: plaintext    

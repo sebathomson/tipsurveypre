@@ -29,7 +29,7 @@
                         <a id="edit" href="{{ path('survey_edit', { 'id': entity.id }) }}"></a>
                     </li>
                     <li>
-                     <a id="deleted" href="{{ path('survey_edit', { 'id': entity.id }) }}"></a>
+                     <a id="deleted" onclick="return confirm('Realmente deseas borrar el registro?')" href="{{ path('survey_delete', { 'id': entity.id }) }}"></a>
                     </li>
 
                 </ul>

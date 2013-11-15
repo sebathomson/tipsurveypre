@@ -1,41 +1,41 @@
 <?php
 
-namespace Tipddy\SurveyBundle\Controller;
+namespace Tipddy\SecurityBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Tipddy\SurveyBundle\Entity\Survey;
-use Tipddy\SurveyBundle\Form\SurveyType;
+use Tipddy\SecurityBundle\Entity\Role;
+use Tipddy\SecurityBundle\Form\RoleType;
 
 /**
- * Survey controller.
+ * Role controller.
  *
  */
-class SurveyController extends Controller
+class RoleController extends Controller
 {
 
     /**
-     * Lists all Survey entities.
+     * Lists all Role entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TipddySurveyBundle:Survey')->findAll();
+        $entities = $em->getRepository('TipddySecurityBundle:Role')->findAll();
 
-        return $this->render('TipddySurveyBundle:Survey:index.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Survey entity.
+     * Creates a new Role entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Survey();
+        $entity = new Role();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +44,26 @@ class SurveyController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('survey_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('role_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('TipddySurveyBundle:Survey:new.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Survey entity.
+    * Creates a form to create a Role entity.
     *
-    * @param Survey $entity The entity
+    * @param Role $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Survey $entity)
+    private function createCreateForm(Role $entity)
     {
-        $form = $this->createForm(new SurveyType(), $entity, array(
-            'action' => $this->generateUrl('survey_create'),
+        $form = $this->createForm(new RoleType(), $entity, array(
+            'action' => $this->generateUrl('role_create'),
             'method' => 'POST',
         ));
 
@@ -73,59 +73,59 @@ class SurveyController extends Controller
     }
 
     /**
-     * Displays a form to create a new Survey entity.
+     * Displays a form to create a new Role entity.
      *
      */
     public function newAction()
     {
-        $entity = new Survey();
+        $entity = new Role();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('TipddySurveyBundle:Survey:new.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Survey entity.
+     * Finds and displays a Role entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
+        $entity = $em->getRepository('TipddySecurityBundle:Role')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Survey entity.');
+            throw $this->createNotFoundException('Unable to find Role entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('TipddySurveyBundle:Survey:show.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Survey entity.
+     * Displays a form to edit an existing Role entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
+        $entity = $em->getRepository('TipddySecurityBundle:Role')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Survey entity.');
+            throw $this->createNotFoundException('Unable to find Role entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('TipddySurveyBundle:Survey:edit.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -133,16 +133,16 @@ class SurveyController extends Controller
     }
 
     /**
-    * Creates a form to edit a Survey entity.
+    * Creates a form to edit a Role entity.
     *
-    * @param Survey $entity The entity
+    * @param Role $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Survey $entity)
+    private function createEditForm(Role $entity)
     {
-        $form = $this->createForm(new SurveyType(), $entity, array(
-            'action' => $this->generateUrl('survey_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new RoleType(), $entity, array(
+            'action' => $this->generateUrl('role_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -151,17 +151,17 @@ class SurveyController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Survey entity.
+     * Edits an existing Role entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
+        $entity = $em->getRepository('TipddySecurityBundle:Role')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Survey entity.');
+            throw $this->createNotFoundException('Unable to find Role entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -171,40 +171,19 @@ class SurveyController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('survey_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('role_edit', array('id' => $id)));
         }
 
-        return $this->render('TipddySurveyBundle:Survey:edit.html.twig', array(
+        return $this->render('TipddySecurityBundle:Role:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Survey entity.
+     * Deletes a Role entity.
      *
      */
-   
-    public function deleteAction(Request $request, $id)
-    {
-       $em = $this->getDoctrine()->getManager();
-       
-       $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
-
-       if (!$entity) {
-           throw $this->createNotFoundException('Unable to find Survey entity.');
-       }
-
-        $em->remove($entity);
-        $em->flush();
-
-
-        return $this->redirect($this->generateUrl('survey'));
-    }
-
-   
-   
-   /*
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
@@ -212,21 +191,21 @@ class SurveyController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
+            $entity = $em->getRepository('TipddySecurityBundle:Role')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Survey entity.');
+                throw $this->createNotFoundException('Unable to find Role entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('survey'));
+        return $this->redirect($this->generateUrl('role'));
     }
-   */
+
     /**
-     * Creates a form to delete a Survey entity by id.
+     * Creates a form to delete a Role entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -235,7 +214,7 @@ class SurveyController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('survey_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('role_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

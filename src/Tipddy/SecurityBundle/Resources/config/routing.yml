@@ -8,3 +8,12 @@ login_check:
 
 login_logout:
     pattern: /logout
+    
+
+TipddySecurityBundle_role:
+    resource: "@TipddySecurityBundle/Resources/config/routing/role.yml"
+    prefix:   /role
+    
+TipddySecurityBundle_user:
+    resource: "@TipddySecurityBundle/Resources/config/routing/user.yml"
+    prefix:   /user
