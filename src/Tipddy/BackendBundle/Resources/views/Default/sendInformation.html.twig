@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tipddybackend/css/style.css') }}" /> 
+{% endblock %}
+
+{% block body %}
+
+{% for flashMessage in app.session.flashbag.get('result_action') %}
+<div class="mensaje-exito">{{ global.msj_action_ok_envio_comentario }}</div>
+{% endfor %}
+
+<div id="envioinformacion">
+<form id="new-list" action="{{ path('comment_sendinformation_create')}}" method="post" {{ form_enctype(form) }} novalidate="novalidate">
+ <fieldset>
+ <legend>Danos unos segundos... Escríbedddnos</legend>
+   {{ form_row(form.typeComment,{'label' : 'Asunto'}) }}
+   {{ form_row(form.description,{'label' : 'Descripción'}) }}
+   
+   {{ form_rest(form) }}
+ </fieldset>
+ 
+<div class="save-cancel-group">
+   <button id="new-list-save" class="button" type="submit">Enviar</button>
+</div>
+</form>
+</div>
+
+{% endblock %}

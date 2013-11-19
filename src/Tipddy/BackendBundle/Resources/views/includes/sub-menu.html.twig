@@ -1,1 +1,8 @@
-{# #}
+<ul>
+{% set subtab = app.request.attributes.get('_route') %}
+
+{% if route_active(subtab, ['user', 'comment']) %}
+<li><a href="{{ path('user') }}" {{ route_active(subtab, 'user') ? 'class="cat-destacada"' : '' }}>Usuarios</a></li>
+<li><a href="{{ path('comment')}}" {{ route_active(subtab, 'comment') ? 'class="cat-destacada"' : '' }}>Comentarios, sugerencias o Ayudas</a></li>
+  {% endif %}
+</ul>

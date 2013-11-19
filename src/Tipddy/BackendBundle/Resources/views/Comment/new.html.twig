@@ -1,0 +1,21 @@
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
+
+{% block content -%}
+   {{ form_start(form, {'attr' : {'novalidate' : 'novalidate'} } ) }}
+   <fieldset>
+     <legend>Nuevo Comentario o Sugerencias</legend>
+     {{ form_row(form.description, {'label' : 'Descripción' }) }}
+     {{ form_row(form.typeComment, {'label' : 'Tipo de comentario' }) }} 
+   </fieldset> 
+ {% include 'TipddyBackendBundle::includes/buttons-form.html.twig' with {'btn_action' : 'Crear', 'route' : 'comment'} %}  
+  {{ form_row(form._token) }} 
+  {{ form_end(form, {'render_rest' : false } ) }}
+  
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('comment') }}">
+          Volver al listado
+        </a>
+    </li>
+</ul>
+{% endblock %}

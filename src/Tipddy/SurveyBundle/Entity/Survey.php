@@ -75,7 +75,7 @@ class Survey
         $this->title = $title;
         
         $this->slug = Util::getSlug($title);
-    
+        
         return $this;
     }
 

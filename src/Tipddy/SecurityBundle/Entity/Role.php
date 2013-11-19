@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tipsurvey_role")
  * @ORM\Entity
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, \Serializable
 {
    /**
     * @var bigint $id
@@ -26,14 +26,15 @@ class Role implements RoleInterface
    protected $etiqueta;
    
    
+   
    public function getRole()
    {
 	   return $this->getEtiqueta();
    }
-   
+      
    public function __toString()
    {
-	   return $this->getRole();
+	   return $this->getEtiqueta();
    }
 
 
@@ -70,4 +71,26 @@ class Role implements RoleInterface
     {
         return $this->etiqueta;
     }
+    
+     /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->etiqueta
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,$this->etiqueta
+        ) = unserialize($serialized);
+    }
+
 }

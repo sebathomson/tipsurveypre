@@ -1,0 +1,38 @@
+comment_sendinformation:
+    pattern: /sendinformation
+    defaults: { _controller: "TipddyBackendBundle:Default:sendInformation" }
+
+comment_sendinformation_create:
+    pattern: /sendinformation/create
+    defaults: { _controller: "TipddyBackendBundle:Default:createInformation"}
+
+comment:
+    pattern:  /
+    defaults: { _controller: "TipddyBackendBundle:Comment:index" }
+
+comment_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TipddyBackendBundle:Comment:show" }
+
+comment_new:
+    pattern:  /new
+    defaults: { _controller: "TipddyBackendBundle:Comment:new" }
+
+comment_create:
+    pattern:  /create
+    defaults: { _controller: "TipddyBackendBundle:Comment:create" }
+    requirements: { _method: post }
+
+comment_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TipddyBackendBundle:Comment:edit" }
+
+comment_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TipddyBackendBundle:Comment:update" }
+    requirements: { _method: post|put }
+
+comment_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TipddyBackendBundle:Comment:delete" }
+    requirements: { _method: post|delete }

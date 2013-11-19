@@ -1,19 +1,18 @@
-{% extends '::base.html.twig' %}
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>User list</h1>
+{% block content -%}
+    <h1>Usuarios <a class="button add-new-h2" href="{{ path('user_new') }}">Nuevo</a></h1>
 
-    <table class="records_list">
+<table id="tabla-listado" class="listado post fixed" cellspacing="0">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>Salt</th>
-                <th>Address</th>
-                <th>Actions</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,29 +22,22 @@
                 <td>{{ entity.firstName }}</td>
                 <td>{{ entity.lastName }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.password }}</td>
-                <td>{{ entity.salt }}</td>
                 <td>{{ entity.address }}</td>
-                <td>
-                <ul>
+                <td class="td-actions">
+                <ul id="iconos">
                     <li>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
+                        <a id="show" href="{{ path('user_show', { 'id': entity.id }) }}"></a>
                     </li>
                     <li>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
+                        <a id="edit" href="{{ path('user_edit', { 'id': entity.id }) }}"></a>
                     </li>
-                </ul>
-                </td>
+                    <li>
+                     <a id="deleted" onclick="return confirm('Realmente deseas borrar el registro?')" href="{{ path('user_delete', { 'id': entity.id }) }}"></a>
+                    </li>
+                 </ul>
+              </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('user_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}

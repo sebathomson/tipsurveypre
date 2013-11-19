@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="tipsurvey_user")
  * @ORM\Entity
  */
- class User implements UserInterface
+ class User implements UserInterface, \Serializable
  {
 	 /**
 	  * @var bigint $id
@@ -85,7 +85,23 @@ use Symfony\Component\Validator\Constraints as Assert;
      */
     public function getRoles()
     {
-        return array('ROLE_USUARIO');
+        //return array('ROLE_USUARIO');
+        return $this->userRoles->toArray();
+    }
+
+    public function getTypeUser()
+    {
+	    $typeRoles = $this->getRoles();
+	    $textRoles = "";
+	    foreach($typeRoles as $i => $typeRol) {
+		    if ($i > 0) {
+			  $textRoles .= ",";    
+		    }
+		      $textRoles .= $typeRol;    
+		    
+	    }
+	    
+	    return  $textRoles;
     }
 
 
@@ -255,6 +271,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         return $this->address;
     }
 
+
+   
     /**
      * Add userRoles
      *
@@ -267,7 +285,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     
         return $this;
     }
-
+    
     /**
      * Remove userRoles
      *
@@ -287,4 +305,42 @@ use Symfony\Component\Validator\Constraints as Assert;
     {
         return $this->userRoles;
     }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->address,             
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->address
+        ) = unserialize($serialized);
+    }
+    
+    public function __toString()
+    {
+	    return $this->getFirstName()." ".$this->getLastName();
+    }
+    
 }

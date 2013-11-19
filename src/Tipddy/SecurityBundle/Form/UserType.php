@@ -16,10 +16,18 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('password')
+            ->add('lastName');
+
+           if (null == $options['data']->getId()) { //Si el usuario no se ha guardado
+	          $builder->add('email')
+	          ->add('password', 'password', array('required' => true));         
+           }  else {
+	          $builder->add('email', null, array('read_only' => true))
+	          ->add('password', 'password', array('required' => false));            
+           }
+
            // ->add('salt')
+          $builder 
             ->add('address')
             ->add('userRoles')
         ;

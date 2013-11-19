@@ -1,52 +1,29 @@
-{% extends '::base.html.twig' %}
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>User</h1>
-
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ entity.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ entity.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ entity.email }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
-            </tr>
-            <tr>
-                <th>Salt</th>
-                <td>{{ entity.salt }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ entity.address }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
-{% endblock %}
+{% block content -%}
+    <fieldset>
+      <legend>Mostrando Usuario</legend>
+      {{ _self.fieldReadText('firstName', entity.firstName, 'Nombre' ) }}
+      {{ _self.fieldReadText('firstName', entity.lastName, 'Apellido' ) }}
+      {{ _self.fieldReadText('email', entity.email, 'Email' ) }}
+      {{ _self.fieldReadText('address', entity.address, 'Dirección' ) }}
+     {# {{ _self.fieldReadText('userRoles', entity.userRoles, 'Roles' ) }}  #}           
+    </fieldset>
+    <p id="nav">
+     <a href="{{ path('user') }}">Volver a listado</a>
+     |
+     <a href="{{ path('user_edit', {'id' : entity.id}) }}">Editar</a>
+     |
+     <a href="#">Borrar</a>
+    </p>
+{% endblock %}    
+    
+{% macro fieldReadText(element, value, label) %}
+      <div class="">
+          <label for="tipddy_securitybundle_show_{{ element }}">{{ label }}</label>
+          
+          <div class="field-wrapper">
+             {{ value }}
+          </div>
+     </div>
+{% endmacro %}        

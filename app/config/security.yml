@@ -13,7 +13,10 @@ security:
                 target: login
                 invalidate_session: false
     access_control:
-         - { path: ^/survey, roles: [ROLE_TIPDDY]}
+         - { path: ^/dashboard, roles: [ROLE_TIPDDY, ROLE_ADMIN]}
+         - { path: ^/survey, roles: [ROLE_TIPDDY, ROLE_ADMIN]}
+         - { path: ^/user, roles: [ROLE_TIPDDY, ROLE_ADMIN]}   
+         - { path: ^/comment, roles: [ROLE_TIPDDY, ROLE_ADMIN]}      
     providers:
          chain_provider:
              chain:

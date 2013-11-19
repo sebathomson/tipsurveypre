@@ -1,0 +1,39 @@
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
+
+{% block content -%}
+    <h1>Comentarios o sugerencias <a class="button add-new-h2" href="{{ path('comment_new') }}">Nuevo</a></h1>
+
+    <table id="tabla-listado" class="listado post fixed" cellspacing="0">
+        <thead>
+            <tr>
+              <th>#</th>
+              <th>Descripción</th>
+              <th>Tipo comentario</th>
+              <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+             <tr class="registro-fila" {{ cycle(['tr-odd', 'tr-even'], loop.index) }}>
+                <td><a href="{{ path('comment_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.description }}</td>
+                  <td>{{ entity.typeComment }}</td> 
+               <td class="td-actions">
+                <ul id="iconos">
+                    <li>
+                        <a id="show" href="{{ path('comment_show', { 'id': entity.id }) }}"></a>
+                    </li>
+                    <li>
+                        <a id="edit" href="{{ path('comment_edit', { 'id': entity.id }) }}"></a>
+                    </li>
+                    <li>
+                     <a id="deleted" onclick="return confirm('Realmente deseas borrar el registro?')" href="{{ path('comment_delete', { 'id': entity.id }) }}"></a>
+                    </li>
+
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ {% endblock %}

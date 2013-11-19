@@ -1,0 +1,28 @@
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
+
+{% block content -%}
+    <fieldset>
+      <legend>Mostrando Comentario o Sugerencia</legend>
+      {{ _self.fieldReadText('description', entity.description, 'Descripción' ) }}
+      {{ _self.fieldReadText('typeComment', entity.typeComment, 'Tipo de comentario' ) }}      
+    </fieldset>
+    
+    <p id="nav">
+     <a href="{{ path('comment') }}">Volver a listado</a>
+     |
+     <a href="{{ path('comment_edit', {'id' : entity.id}) }}">Editar</a>
+     |
+     <a href="#">Borrar</a>
+    </p>
+{% endblock %}    
+    
+{% macro fieldReadText(element, value, label) %}
+      <div class="">
+          <label for="tipddy_surveybundle_show_{{ element }}">{{ label }}</label>
+          
+          <div class="field-wrapper">
+             {{ value }}
+          </div>
+     </div>
+{% endmacro %}   
+    
