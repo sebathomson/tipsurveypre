@@ -1,8 +1,8 @@
 var collectionHolder = $('div#all-answers');
 
 //configure link add_answers
-var $addAnswersLink = $('<a href="#" class="buttom-embed">New Answer</a>');
-var $newLinkLi = $('<table><tr><td></td></tr></table>').append($addAnswersLink);
+var $addAnswersLink = $('<a href="#" class="buttom-embed">Añadir Respuesta</a>');
+var $newLinkLi = $('<table width="100%"><tr><td></td></tr></table>').append($addAnswersLink);
 
 jQuery(document).ready(function () {
 	

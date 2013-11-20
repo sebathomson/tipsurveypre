@@ -2189,7 +2189,7 @@ tr.registro-fila ul {
 }
 
 tr.registro-fila ul#iconos {
-	width: 140px;
+	width: 100%;
 }
 
 tr.registro-fila ul li {
@@ -2198,6 +2198,17 @@ tr.registro-fila ul li {
 	margin-left: 2px;
 
 }
+
+ul#iconos li #questions, #questions {
+    background: url("../images/iconos.png") no-repeat scroll -82px 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 22px;
+    margin: 0 0 0 1px;
+    width: 41px;
+}
+
+
+
 
 ul#iconos li #edit, #edit {
     background: url("../images/iconos.png") no-repeat scroll -41px 0 rgba(0, 0, 0, 0);
@@ -2237,8 +2248,13 @@ ul#iconos li #deleted:hover, #deleted:hover {
 }
 
 td.td-actions {
-	width: 18%;
+	width: 20%;
 }
+
+#all-answers {
+	display: inline-block;
+}
+
 
 
 /* Filtros Listados */

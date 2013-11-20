@@ -19,11 +19,13 @@ class QuestionController extends Controller
      * Lists all Question entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $session = $request->getSession();
+        
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TipddySurveyBundle:Question')->findAll();
+        $entities = $em->getRepository('TipddySurveyBundle:Question')->findBySurvey($session->get('survey'));
 
         return $this->render('TipddySurveyBundle:Question:index.html.twig', array(
             'entities' => $entities,
@@ -38,9 +40,20 @@ class QuestionController extends Controller
         $entity = new Question();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        
+        $session = $request->getSession();
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $survey = $em->getRepository('TipddySurveyBundle:Survey')->find($session->get('survey'));
+            
+            if (!$survey) {
+	            throw $this->createNotFoundException('Unable to find Survey entity.');
+            }
+            
+            $entity->setSurvey($survey);            
+            
             $em->persist($entity);
             $em->flush();
 

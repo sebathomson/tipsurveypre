@@ -29,6 +29,26 @@ class SurveyController extends Controller
             'entities' => $entities,
         ));
     }
+    
+    
+    public function questionsAction(Request $request, $id)
+    {
+       $em = $this->getDoctrine()->getManager();
+       
+       $entity = $em->getRepository('TipddySurveyBundle:Survey')->find($id);
+       
+       if (!$entity) {
+	        throw $this->createNotFoundException('Unable to find Survey entity.');
+       }
+       
+       $session = $request->getSession();
+       $session->set('survey', $entity->getId());
+       
+       return $this->redirect($this->generateUrl('question'));
+	    
+    }
+       
+    
     /**
      * Creates a new Survey entity.
      *

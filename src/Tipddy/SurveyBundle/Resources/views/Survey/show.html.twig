@@ -4,7 +4,19 @@
     <fieldset>
       <legend>Mostrando Encuesta</legend>
       {{ _self.fieldReadText('title', entity.title, 'Título' ) }}
-      {{ _self.fieldReadText('description', entity.description, 'Descripción' ) }}      
+      {{ _self.fieldReadText('description', entity.description, 'Descripción' ) }}   
+      {% for obj in entity.questions %}
+             <div class="q-titulo">{{ obj.question }}</div>
+             {% set typeAnswer = obj.answerType | lower %}
+             {% set typeAnswer = typeAnswer == 'text' ? 'answer' : typeAnswer  %}
+                
+                {% for answer in obj.answers %}
+                     {{ attribute(answer, typeAnswer ) }}
+                {% endfor %}
+             
+      {% endfor %}
+      
+         
     </fieldset>
     <p id="nav">
      <a href="{{ path('survey') }}">Volver a listado</a>

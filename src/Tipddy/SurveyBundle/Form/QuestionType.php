@@ -17,13 +17,13 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question')
-            ->add('description')
+            ->add('question', 'text')
+            ->add('description', 'text')
             ->add('randomOrder')
             ->add('questionRequired')
            // ->add('survey')
-            ->add('questionType')
-            ->add('answerType')
+            ->add('questionType', null, array('empty_value' => false))
+            ->add('answerType', null, array('empty_value' => false))
             ->add('answers', 'collection', array(
                  'type' => new AnswerType(),
                  'allow_add' => true,

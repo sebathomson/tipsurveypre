@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'TipddyBackendBundle::layout.html.twig' %}
 
 {% block javascripts %}
    {{ parent() }}
@@ -6,19 +6,19 @@
 
 {% endblock %}
 
-{% block body -%}
-    <h1>Question edit</h1>
-
-    {{ form_start(edit_form) }}
+{% block content -%}
+   {{ form_start(edit_form, {'attr' : {'novalidate' : 'novalidate'} } ) }}
     {{ form_errors(edit_form) }}
-       {{ form_row(edit_form.question) }}
-       {{ form_row(edit_form.description) }}
-       {{ form_row(edit_form.randomOrder) }}
-       {{ form_row(edit_form.questionType) }}
-       {{ form_row(edit_form.answerType) }}
-       {{ form_row(edit_form.questionRequired) }}
-       
-    <div id="all-answers" data-prototype='
+  
+   <fieldset>
+     <legend>Editando Pregunta</legend>
+           {{ form_row(edit_form.question, {'label' : 'Pregunta'}) }}
+           {{ form_row(edit_form.description, {'label' : 'Descripción'}) }}
+           {{ form_row(edit_form.randomOrder, {'label' : 'Orden Random'}) }}
+           {{ form_row(edit_form.questionType, {'label' : 'Tipo de Pregunta'}) }}
+           {{ form_row(edit_form.answerType, {'label' : 'Tipo de Repuesta'}) }}
+           {{ form_row(edit_form.questionRequired, {'label' : 'Pregunta Obligatoria'}) }}
+     <div id="all-answers" data-prototype='
         <table class="new-answers" id="tipddy_tipsurveybundle_questiontype_answers_$$name$$">
           <tr>
              <td>&nbsp;</td>
@@ -54,23 +54,22 @@
             <td colspan="2">{{ form_widget(edit_form.answers.vars.prototype.video) }}</td>
             <td class="adelete"></td>
          </tr>
-        </table>'>      
-      {#  {{ 'el valor de tipo de repuestas es ' ~ edit_form.vars.value.answerType }} #}
-       {% for answer in edit_form.answers %}
+        </table>'>     
+        {% for answer in edit_form.answers %}
              
               {% include 'TipddySurveyBundle:Question:includes/form-data-prototype-' ~ edit_form.vars.value.answerType|lower ~ '.html.twig' %}
         
         {% endfor %}
      </div>
-    {{ form_row(edit_form.submit) }}     
-    {{ form_row(edit_form._token) }}  
-    {{ form_end(edit_form, {'render_rest' : false }) }} 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('question', {'survey' : app.session.get('survey')}) }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+  {% include 'TipddyBackendBundle::includes/buttons-form.html.twig' with {'btn_action' : 'Actualizar', 'route' : 'question'} %}        
+      {{ form_row(edit_form._token) }}      
+      {{ form_end(edit_form, {'render_rest' : false }) }}   
+ <ul class="record_actions">
+      <li>
+         <a href="{{ path('question') }}">
+          Volver al listado
+         </a>
+      </li>
+    </ul>  
 </ul>
 {% endblock %}
