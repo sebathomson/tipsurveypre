@@ -1,7 +1,7 @@
 survey_questions:
     pattern: /{id}/questions
     defaults: { _controller: "TipddySurveyBundle:Survey:questions"}
-    requirements: { survey: \d+ }
+    requirements: { id: \d+ }
     
 survey:
     pattern:  /
