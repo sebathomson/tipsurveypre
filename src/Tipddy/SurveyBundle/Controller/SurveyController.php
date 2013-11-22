@@ -262,6 +262,9 @@ class SurveyController extends Controller
         ;
     }
 
+    /**
+     * asasdasd
+     */
     public function enviarEncuestaAction(Request $request) {
         var_dump($request);
         exit();
