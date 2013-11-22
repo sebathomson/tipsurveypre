@@ -2,7 +2,7 @@ survey_questions:
     pattern: /{id}/questions
     defaults: { _controller: "TipddySurveyBundle:Survey:questions"}
     requirements: { id: \d+ }
-    
+
 survey:
     pattern:  /
     defaults: { _controller: "TipddySurveyBundle:Survey:index" }
@@ -32,4 +32,8 @@ survey_update:
 survey_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "TipddySurveyBundle:Survey:delete" }
-  
+
+survey_send:
+    pattern:  /enviarEncuesta
+    defaults: { _controller: "TipddySurveyBundle:Survey:enviarEncuesta" }
+    requirements: { _method: post }

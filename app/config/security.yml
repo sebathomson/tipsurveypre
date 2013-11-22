@@ -15,7 +15,7 @@ security:
     access_control:
          - { path: ^/dashboard, roles: [ROLE_TIPDDY, ROLE_ADMIN]}
          - { path: ^/survey, roles: [ROLE_TIPDDY, ROLE_ADMIN]}
-         - { path: ^/user, roles: [ROLE_TIPDDY, ROLE_ADMIN]}   
+         # - { path: ^/user, roles: [ROLE_TIPDDY, ROLE_ADMIN]}   
          - { path: ^/comment, roles: [ROLE_TIPDDY, ROLE_ADMIN]}      
     providers:
          chain_provider:

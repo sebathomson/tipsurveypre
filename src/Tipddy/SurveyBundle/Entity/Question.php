@@ -66,7 +66,7 @@ class Question
        
        /**
         * 
-        * @ORM\ManyToOne(targetEntity="QuestionType", inversedBy="questions")
+        * @ORM\ManyToOne(targetEntity="QuestionType")
         * @ORM\JoinColumns({
         * @ORM\JoinColumn(name="questiontype_id",    referencedColumnName="id")
         * })
